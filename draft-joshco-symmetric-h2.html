@@ -1131,6 +1131,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-http-2-authority" class="internal xref">HTTP/2 Authority</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-client-known-urn" class="internal xref">Client Known URN</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
@@ -1166,11 +1169,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
         </h3>
 <p id="section-1.1-1">This document uses the following terminology.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">Client = The HTTP/2 client that initiates an HTTP/2 connection to a server<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3">Server - The HTTP/2 server that accepts an inbound connection from the client<a href="#section-1.1-3" class="pilcrow">¶</a></p>
-<p id="section-1.1-4">Agent - The HTTP engine that processes incoming requests and generates responses<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">Client Agent - The Agent on the client<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<p id="section-1.1-6">Server Agent - The Agent on the server<a href="#section-1.1-6" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">+---------------------------------------------------------------------------------------------+
+| Client        | The HTTP/2 client that initiates an HTTP/2 connection to a server           |
++---------------|-----------------------------------------------------------------------------|
+| Server        | The HTTP/2 server that accepts an inbound connection from the client        |
++---------------|-----------------------------------------------------------------------------|
+| Agent         | The HTTP engine that processes incoming requests and generates responses    |
++---------------|-----------------------------------------------------------------------------|
+| Client Agent  | The Agent on the client                                                     |
++---------------------------------------------------------------------------------------------+<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">Server Agent - The Agent on the server<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1204,6 +1212,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-2.2-2.2.1">Set to the value of <code>TOKEN</code><a href="#section-2.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+</section>
+</div>
+<div id="client-known-urn">
+<section id="section-2.3">
+        <h3 id="name-client-known-urn">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-client-known-urn" class="section-name selfRef">Client Known URN</a>
+        </h3>
+<p id="section-2.3-1">In situations where a client needs to provide a URI to the server, for example to register a subscription, it <span class="bcp14">MUST</span> use the following URN as a prefix.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">For example, if the client wishes to receive HTTP messages as a specific path, <code>/foo</code>, the URI would be:<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.3-3"><code>urn:symmetric_http:client/foo</code><a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

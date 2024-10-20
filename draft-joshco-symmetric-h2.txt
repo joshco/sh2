@@ -62,6 +62,7 @@ Table of Contents
    2.  HTTP/2 Extensions
      2.1.  HTTP/2 SETTINGS_SYMMETRIC
      2.2.  HTTP/2 Authority
+     2.3.  Client Known URN
    3.  Conventions and Definitions
    4.  Security Considerations
    5.  IANA Considerations
@@ -75,16 +76,18 @@ Table of Contents
 
    This document uses the following terminology.
 
-   Client = The HTTP/2 client that initiates an HTTP/2 connection to a
-   server
-
-   Server - The HTTP/2 server that accepts an inbound connection from
-   the client
-
-   Agent - The HTTP engine that processes incoming requests and
-   generates responses
-
-   Client Agent - The Agent on the client
+   +--------------------------------------------------------------------
+   -------------------------+ | Client | The HTTP/2 client that
+   initiates an HTTP/2 connection to a server | +---------------|-------
+   ---------------------------------------------------------------------
+   -| | Server | The HTTP/2 server that accepts an inbound connection
+   from the client | +---------------|----------------------------------
+   -------------------------------------------| | Agent | The HTTP
+   engine that processes incoming requests and generates responses | +--
+   -------------|-------------------------------------------------------
+   ----------------------| | Client Agent | The Agent on the client | +-
+   ---------------------------------------------------------------------
+   -----------------------+
 
    Server Agent - The Agent on the server
 
@@ -110,6 +113,17 @@ Table of Contents
    *  Omitted
 
    *  Set to the value of TOKEN
+
+2.3.  Client Known URN
+
+   In situations where a client needs to provide a URI to the server,
+   for example to register a subscription, it MUST use the following URN
+   as a prefix.
+
+   For example, if the client wishes to receive HTTP messages as a
+   specific path, /foo, the URI would be:
+
+   urn:symmetric_http:client/foo
 
 3.  Conventions and Definitions
 
