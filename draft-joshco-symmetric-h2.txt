@@ -14,7 +14,8 @@ Expires: 23 April 2025
 Abstract
 
    This draft defines an HTTP/2 extension to support Symmetric HTTP,
-   which makes a simplifying assumption that the client-side HTTP server
+   which makes a simplifying assumption that the client-side HTTP
+   server.
 
 Discussion Venues
 
@@ -64,6 +65,7 @@ Table of Contents
    3.  Conventions and Definitions
    4.  Security Considerations
    5.  IANA Considerations
+     5.1.  HTTP/2 Settings Registry Update
    6.  Normative References
    Appendix A.  Acknowledgments
    Author's Address
@@ -79,26 +81,26 @@ Table of Contents
 
    This document uses the following terminology.
 
-           +========+=========================================+
-           | Term   | Definition                              |
-           +========+=========================================+
-           | Client | The HTTP/2 client that initiates an     |
-           |        | HTTP/2 connection to a server           |
-           +--------+-----------------------------------------+
-           | Server | The HTTP/2 server that accepts an       |
-           |        | inbound connection from the client      |
-           +--------+-----------------------------------------+
-           | Agent  | The HTTP engine that processes incoming |
-           |        | requests and generates responses        |
-           +--------+-----------------------------------------+
-           | Client | The Agent on the client                 |
-           | Agent  |                                         |
-           +--------+-----------------------------------------+
-           | Server | The Agent on the server                 |
-           | Agent  |                                         |
-           +--------+-----------------------------------------+
+            +========+========================================+
+            | Term   | Definition                             |
+            +========+========================================+
+            | Client | The HTTP/2 client that initiates an    |
+            |        | HTTP/2 connection to a server          |
+            +--------+----------------------------------------+
+            | Server | The HTTP/2 server that accepts an      |
+            |        | inbound connection from the client     |
+            +--------+----------------------------------------+
+            | Agent  | An HTTP engine that processes incoming |
+            |        | requests and generates responses       |
+            +--------+----------------------------------------+
+            | Client | The Agent on the client                |
+            | Agent  |                                        |
+            +--------+----------------------------------------+
+            | Server | The Agent on the server                |
+            | Agent  |                                        |
+            +--------+----------------------------------------+
 
-                                 Table 1
+                                  Table 1
 
 1.2.  Simplifying Assumption
 
@@ -108,26 +110,27 @@ Table of Contents
 
    Section 3 of ([P2P]) states:
 
-   a listener or coalescing intermediary has no in- band method of
-   validating that a dialer's authority claims are valid.  Therefore, a
-   conforming listener MUST confirm a dialer's authority claims using
-   some out-of-band method.
+      a listener or coalescing intermediary has no in- band method of
+      validating that a dialer's authority claims are valid.  Therefore,
+      a conforming listener MUST confirm a dialer's authority claims
+      using some out-of-band method.
 
    This document attempts to sidestep that issue by having the client
-   only accessible, or addressable by the HTTP/2 server that it
-   connected with.  As a result, a real-world authority isn't necessary.
+   only accessible, or addressable by the HTTP/2 server that it opened
+   an HTTP/2 connected to.  As a result, a real-world authority isn't
+   necessary.
 
    Instead the client, known only to the server, is simply the "other
-   side" of an HTTP/2 connection, and it specified according to the
+   side" of an HTTP/2 connection, and is specified according to the
    Client Authority section of this document.
 
 2.  HTTP/2 Extensions
 
    This document overrides HTTP/2 [RFC9113] section 5.1, where it says:
 
-   "If this stream is initiated by the server, as described in
-   Section 5.1.1, then receiving a HEADERS frame MUST also be treated as
-   a connection error (Section 5.4.1) of type PROTOCOL_ERROR."
+      "If this stream is initiated by the server, as described in
+      Section 5.1.1, then receiving a HEADERS frame MUST also be treated
+      as a connection error (Section 5.4.1) of type PROTOCOL_ERROR."
 
    When operating in symmetric HTTP mode, this restriction is removed.
 
@@ -175,19 +178,18 @@ Table of Contents
 
 4.  Security Considerations
 
-   This document does not address security of the protocols involved.
-   The WPAD protocol is vulnerable to existing identified weaknesses in
-   DHCP and DNS.  The groups driving those standards, as well as the SLP
-   protocol standards, are addressing security.
-
-   When using DHCP discovery, clients are encouraged to use unicast DHCP
-   INFORM queries instead of broadcast queries which are more easily
-   spoofed in insecure networks.
-
-   Minimally, it can be said that the WPAD protocol does not create new
-   security weaknesses.
+   This document defines the client and client agent to be only
+   accessible and addressable from the HTTP/2 server it has connected
+   to.  It is not yet know if there are viable exploits that would allow
+   a third party to access the client agent.
 
 5.  IANA Considerations
+
+5.1.  HTTP/2 Settings Registry Update
+
+   This document updates the registry for HTTP/2 Settings ([RFC7540],
+   Section 11.4) to add SETTINGS_SYMMETRIC, ID=0xTBA, which can have a
+   value of 1 or 0.
 
 6.  Normative References
 
@@ -214,6 +216,10 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9113>.
 
 Appendix A.  Acknowledgments
+
+   This document draws wisom and inspiration from Cory Benfield's
+   Intenet Draft from 2015, "Peer-to-peer Extension to HTTP/2", draft-
+   benfield-http2-p2p-02 ([P2P]).
 
 Author's Address
 
