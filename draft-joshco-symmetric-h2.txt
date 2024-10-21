@@ -13,9 +13,10 @@ Expires: 23 April 2025
 
 Abstract
 
-   This draft defines an HTTP/2 extension to support Symmetric HTTP,
-   which makes a simplifying assumption that the client-side HTTP
-   server.
+   This draft defines an HTTP/2 [RFC9113] extension to support Symmetric
+   HTTP, which makes a simplifying assumption that the client-side HTTP
+   server is only accessible and addressible by the server that accepted
+   the HTTP/2 connection.
 
 Discussion Venues
 
@@ -155,7 +156,7 @@ Table of Contents
 
    *  Omitted
 
-   *  Set to the value of TOKEN
+   *  Set to the value of TBA_TOKEN
 
 2.2.2.  Client Known URN
 
