@@ -217,7 +217,7 @@ Table of Contents
 
 Appendix A.  Acknowledgments
 
-   This document draws wisom and inspiration from Cory Benfield's
+   This document draws wisdom and inspiration from Cory Benfield's
    Intenet Draft from 2015, "Peer-to-peer Extension to HTTP/2", draft-
    benfield-http2-p2p-02 ([P2P]).
 
