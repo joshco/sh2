@@ -13,12 +13,8 @@ Expires: 23 April 2025
 
 Abstract
 
-   This draft defines an HTTP/2 extension to support Symmetric HTTP.
-   This document defines Symmetric HTTP as bi-directional HTTP/2, where
-   the server can initiate streams to the client, to interact with
-   resources hosted by an HTTP server agent running on the client.  A
-   simplifying assumption is that the client HTTP server agent is only
-   accessible to the HTTP/2 server that is a peer on the connection.
+   This draft defines an HTTP/2 extension to support Symmetric HTTP,
+   which makes a simplifying assumption that the client-side HTTP server
 
 Discussion Venues
 
@@ -59,10 +55,12 @@ Table of Contents
 
    1.  Introduction
      1.1.  Terminology
+     1.2.  Simplifying Assumption
    2.  HTTP/2 Extensions
      2.1.  HTTP/2 SETTINGS_SYMMETRIC
-     2.2.  HTTP/2 Authority
-     2.3.  Client Known URN
+     2.2.  Client Authority
+       2.2.1.  HTTP/2 Authority
+       2.2.2.  Client Known URN
    3.  Conventions and Definitions
    4.  Security Considerations
    5.  IANA Considerations
@@ -71,6 +69,11 @@ Table of Contents
    Author's Address
 
 1.  Introduction
+
+   This extension allows the client or browser to act as a web server
+   which receives HTTP requests from the origin server and send
+   responses back.  This is enabled by allowing server initiated streams
+   to the client.  To avoid confusion over terminology...
 
 1.1.  Terminology
 
@@ -91,12 +94,42 @@ Table of Contents
            | Client | The Agent on the client                 |
            | Agent  |                                         |
            +--------+-----------------------------------------+
+           | Server | The Agent on the server                 |
+           | Agent  |                                         |
+           +--------+-----------------------------------------+
 
                                  Table 1
 
-   Server Agent - The Agent on the server
+1.2.  Simplifying Assumption
+
+   A previous draft "Peer-to-peer Extension to HTTP/2" ([P2P]) attempted
+   to create bidirectional HTTP/2 extension, but specified that the
+   client authority needed to be verified out of band.
+
+   Section 3 of ([P2P]) states:
+
+   a listener or coalescing intermediary has no in- band method of
+   validating that a dialer's authority claims are valid.  Therefore, a
+   conforming listener MUST confirm a dialer's authority claims using
+   some out-of-band method.
+
+   This document attempts to sidestep that issue by having the client
+   only accessible, or addressable by the HTTP/2 server that it
+   connected with.  As a result, a real-world authority isn't necessary.
+
+   Instead the client, known only to the server, is simply the "other
+   side" of an HTTP/2 connection, and it specified according to the
+   Client Authority section of this document.
 
 2.  HTTP/2 Extensions
+
+   This document overrides HTTP/2 [RFC9113] section 5.1, where it says:
+
+   "If this stream is initiated by the server, as described in
+   Section 5.1.1, then receiving a HEADERS frame MUST also be treated as
+   a connection error (Section 5.4.1) of type PROTOCOL_ERROR."
+
+   When operating in symmetric HTTP mode, this restriction is removed.
 
 2.1.  HTTP/2 SETTINGS_SYMMETRIC
 
@@ -110,7 +143,9 @@ Table of Contents
    receives this setting from the server, it must respond with a
    conection error [HTTP2] Section 5.4.1) of type PROTOCOL ERROR.
 
-2.2.  HTTP/2 Authority
+2.2.  Client Authority
+
+2.2.1.  HTTP/2 Authority
 
    In the use of symmetric HTTP, when the server sends an HTTP message
    to the client agent, the authority header is either:
@@ -119,7 +154,7 @@ Table of Contents
 
    *  Set to the value of TOKEN
 
-2.3.  Client Known URN
+2.2.2.  Client Known URN
 
    In situations where a client needs to provide a URI to the server,
    for example to register a subscription, it MUST use the following URN
@@ -160,6 +195,11 @@ Table of Contents
               DOI 10.17487/RFC9113, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9113>.
 
+   [P2P]      Benfield, C., "Peer-to-peer Extension to HTTP/2", Work in
+              Progress, Internet-Draft, draft-benfield-http2-p2p-02, 9
+              October 2015, <https://datatracker.ietf.org/doc/html/
+              draft-benfield-http2-p2p-02>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -168,6 +208,10 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9113]  Thomson, M., Ed. and C. Benfield, Ed., "HTTP/2", RFC 9113,
+              DOI 10.17487/RFC9113, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9113>.
 
 Appendix A.  Acknowledgments
 
