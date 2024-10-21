@@ -181,16 +181,15 @@ Table of Contents
 
    This document defines the client and client agent to be only
    accessible and addressable from the HTTP/2 server it has connected
-   to.  It is not yet know if there are viable exploits that would allow
-   a third party to access the client agent.
+   to.  It is not yet known if there are viable exploits that would
+   allow a third party to access the client agent using symmetric HTTP.
 
 5.  IANA Considerations
 
 5.1.  HTTP/2 Settings Registry Update
 
-   This document updates the registry for HTTP/2 Settings ([RFC7540],
-   Section 11.4) to add SETTINGS_SYMMETRIC, ID=0xTBA, which can have a
-   value of 1 or 0.
+   This document updates the registry for HTTP/2 Settings to add
+   SETTINGS_SYMMETRIC, ID=0xTBA, which can have a value of 1 or 0.
 
 6.  Normative References
 
