@@ -4,8 +4,8 @@
 
 Network Working Group                                           J. Cohen
 Internet-Draft                                                      Self
-Intended status: Informational                           20 October 2024
-Expires: 23 April 2025
+Intended status: Informational                           21 October 2024
+Expires: 24 April 2025
 
 
                        Symmetric HTTP/2 Extension
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -76,7 +76,14 @@ Table of Contents
    This extension allows the client or browser to act as a web server
    which receives HTTP requests from the origin server and send
    responses back.  This is enabled by allowing server initiated streams
-   to the client.  To avoid confusion over terminology...
+   to the client.
+
+   Resources on the client side of an HTTP/2 connection are addressed
+   using a URN prefix.  The path /foo on the client is addressed as
+
+   urn:symmetric_http:client/foo
+
+   To avoid confusion over terminology...
 
 1.1.  Terminology
 
